@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*{
+    @apply m-0 p-0 box-border lg:text-base text-sm
+}
+
+.body{
+    @apply w-screen h-screen bg-[#1b1b1b]
+}
