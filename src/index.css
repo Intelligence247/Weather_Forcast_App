@@ -7,5 +7,5 @@
 }
 
 .body{
-    @apply w-screen h-screen bg-[#1b1b1b]
+    @apply w-screen h-screen bg-[white]
 }
