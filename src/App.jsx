@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import { Line } from 'react-chartjs-2';
-// import { Bar } from 'react-chartjs-2'
+import BarChartComponent from './Components/BarChartComponent';
 function App() {
   const [count, setCount] = useState(0)
  
@@ -21,37 +20,19 @@ if('geolocation' in navigator){
   console.log("geolocation is not supported")
 }
 
-const data = {
-  labels: ['January', 'February', 'March', 'April', 'May'],
-  datasets: [
-    {
-      label: 'Data 1',
-      data: [12, 19, 3, 5, 2, 3],
-      fill: false,
-      borderColor: 'red',
-    },
-    {
-      label: 'Data 2',
-      data: [5, 10, 20, 30, 40, 50],
-      fill: false,
-      borderColor: 'blue',
-    },
-  ],
-};
-  return (
-    <div className='body'>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime aliquam aliquid, excepturi voluptas est ad. Repellat deserunt porro placeat provident ut, tempora quisquam fuga, iusto accusamus libero cupiditate, qui labore.
-      {/* <Bar data={data}/> */}
-      <Line data={data}/>
 
+  return     <div className='body'>
+      <BarChartComponent/>
     </div>
-  )
+  
 }
 
 export default App
 
 
 
+
+// https://phenomenal-sunshine-547717.netlify.app
 
 
 // 07081236562
