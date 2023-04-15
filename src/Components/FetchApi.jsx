@@ -1,8 +1,11 @@
 import axios from 'axios'
 import { useEffect, React, useState } from 'react'
+import { Line } from 'react-chartjs-2'
+import LineChart from './LineChart'
 
 const FetchApi = () => {
   const [city, setCity] = useState('Ilorin')
+  const [dataAPI, setDataApi] = useState([])
     const lat = 6.5994752
     const lon = 3.3488896
     const apiKey = '9f90a349f83eff086947292eeda42dec'
@@ -11,7 +14,7 @@ const url2 = 'https://aws.random.cat/meow'
     const fetchData=()=>{
     axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f90a349f83eff086947292eeda42dec`)
     .then(res=>{
-        console.log(res)
+        setDataApi(res[1])
     })
     .catch(err=>{
         console.log(err+'errrrrrrrrrrr')
@@ -20,8 +23,14 @@ const url2 = 'https://aws.random.cat/meow'
 useEffect(() => {
    fetchData()
 }, []);
+// for (const d of dataAPI){
+//   console.log(d)
+// }
+console.log(dataAPI)
   return (
-    <div>FetchApi</div>
+    <div>
+      {/* <LineChart chartData={''}/> */}
+    </div>
   )
 }
 

@@ -20,19 +20,22 @@ function App() {
     borderWidth:2,
     color:'white',
     
-  }],
-  datasets:[{
-    label:'Users Gained',
-    data:[90,70,12,89],
+  },
+{
+  label:'Users Gained',
+    data:[90,70,12,89,78,98],
     backgroundColor:['green', 'blue', 'yellow','#33323','#5a3242',"#2bcde9"],
     borderColor:'lightBlue',
     borderWidth:2,
     color:'black',
+}],
 
     
 
     
-  }]
+
+    
+ 
 
  })
  
@@ -46,8 +49,8 @@ if('geolocation' in navigator){
 
     axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
     .then(data=>{
-      const city = data.address.city;
-      console.log(city)
+      // const city = data.address.city;
+      // console.log(city)
     })
     .catch((err)=>console.log(err))
   },
@@ -63,10 +66,10 @@ if('geolocation' in navigator){
   return (   
      <div className='body'>
       <main>
-<div className="bar w-[30rem] h-[20rem] m-auto"> 
+<div className="bar w-[full] h-[20rem] m-auto"> 
 <BarChartComponent chartData={userData}/>
 </div>
-<div className="bar w-[30rem] h-[20rem] m-auto"> 
+<div className="bar w-[full] h-[20rem] m-auto"> 
 <LineChart chartData={userData}/>
 </div>
 
