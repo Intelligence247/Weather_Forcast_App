@@ -10,12 +10,15 @@ import LineChart from './Components/LineChart';
 function App() {
  const [userData, setUserData] = useState({
   labels: UserData.map((data)=>data.year),
+  color:'white',
+
   datasets:[{
     label:'Users Gained',
     data:UserData.map((data)=>data.userLost),
     backgroundColor:['green', 'blue', 'yellow','#33323','#5a3242',"#2bcde9"],
     borderColor:'lightBlue',
     borderWidth:2,
+    color:'white',
     
   }],
   datasets:[{
@@ -24,6 +27,10 @@ function App() {
     backgroundColor:['green', 'blue', 'yellow','#33323','#5a3242',"#2bcde9"],
     borderColor:'lightBlue',
     borderWidth:2,
+    color:'black',
+
+    
+
     
   }]
 
@@ -55,13 +62,16 @@ if('geolocation' in navigator){
 
   return (   
      <div className='body'>
-<div className="bar w-[30rem] h-[20rem] m-auto"> <BarChartComponent chartData={userData}/>
+      <main>
+<div className="bar w-[30rem] h-[20rem] m-auto"> 
+<BarChartComponent chartData={userData}/>
 </div>
 <div className="bar w-[30rem] h-[20rem] m-auto"> 
 <LineChart chartData={userData}/>
 </div>
 
 <FetchApi/>
+</main>
     </div>
   )
 }
