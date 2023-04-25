@@ -4,7 +4,9 @@ import {Chart as chartjs} from "chart.js/auto"
 function LineChart({chartData}) {
   return  <Line
             data={chartData} 
-           
+           width={600}
+           height={350}
+            options={{maintainAspectRatio:false}}
             /> 
   
 }

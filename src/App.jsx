@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import BarChartComponent from './Components/BarChartComponent';
 import { UserData } from './Data';
 import './App.css'
@@ -6,45 +6,54 @@ import FetchApi from './Components/FetchApi';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import LineChart from './Components/LineChart';
+import { data } from 'autoprefixer';
 
 function App() {
- const [userData, setUserData] = useState({
-  labels: UserData.map((data)=>data.year),
-  color:'white',
+  const [dataAPI, setDataApi] = useState([])
+  const [tmp, setTmp] = useState([])
+  const [city, setCity] = useState('Ilorin')
+  console.log(UserData)
 
+
+
+ const userData=({ 
+  labels:dataAPI.map((t)=>t.dt_txt),
   datasets:[{
-    label:'Users Gained',
-    data:UserData.map((data)=>data.userLost),
+    label:'Temperature',
+    data:tmp.map((t)=>(t.temp_min+t.temp_max)/2 ),
     backgroundColor:['green', 'blue', 'yellow','#33323','#5a3242',"#2bcde9"],
-    borderColor:'lightBlue',
-    borderWidth:2,
+    borderColor:'yellow',
+    borderWidth:3,
     color:'white',
-    
   },
-{
-  label:'Users Gained',
-    data:[90,70,12,89,78,98],
-    backgroundColor:['green', 'blue', 'yellow','#33323','#5a3242',"#2bcde9"],
-    borderColor:'lightBlue',
-    borderWidth:2,
-    color:'black',
-}],
 
-    
+ {
+   label:'pressure',
+     data:tmp.map((t)=>t.feels_like),
+     backgroundColor:['green', 'blue', 'yellow','#33323','#5a3242',"#2bcde9"],
+     borderColor:'black',
+     borderWidth:3,
+     color:'green',
+ },
+ {
+     label:'humidity',
+     data:tmp.map((t)=>t.humidity),
+     backgroundColor:["transparent"],
+     borderColor:'indigo',
+     borderWidth:2,
+     width:"2rem"
+ },
 
-    
+],
 
-    
- 
 
  })
- 
 if('geolocation' in navigator){
   navigator.geolocation.watchPosition(function(position){
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
-    console.log("latitude: "+ latitude)
-    console.log("Longitude: "+ longitude)
+    // console.log("latitude: "+ latitude)
+    // console.log("Longitude: "+ longitude)
     navigator.geolocation.clearWatch(position)
 
     axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
@@ -62,18 +71,46 @@ if('geolocation' in navigator){
   console.log("geolocation is not supported")
 }
 
+// API Fetch
+const fetchData=()=>{
+  axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f90a349f83eff086947292eeda42dec&units=metric`)
+
+  .then(res=>{
+      setDataApi(res.data.list)
+      let tmpArr= []
+     for(const c of res.data.list){
+     tmpArr.push(c.main)
+     }
+     setTmp(tmpArr)
+  })
+  .catch(err=>{
+      console.log(err+'errrrrrrrrrrr')
+  })
+}
+useEffect(() => {
+ fetchData()
+}, []);
+console.log(tmp.length)
 
   return (   
      <div className='body'>
+      <input type="text" className='w-full m-auto text-black'/>
       <main>
-<div className="bar w-[full] h-[20rem] m-auto"> 
-<BarChartComponent chartData={userData}/>
-</div>
-<div className="bar w-[full] h-[20rem] m-auto"> 
-<LineChart chartData={userData}/>
-</div>
+ {/* <div className="bar w-[full] h-[20rem] m-auto">  */}
 
-<FetchApi/>
+{/* {tmp.map((x)=>(
+  <p>{x.temp}</p>
+))} */}
+{/* </div>   */}
+{
+  <div className="bar w-[full] h-[20rem] m-auto grid place-items-center"> 
+  <LineChart chartData={userData}/>
+  </div>
+}
+
+
+
+{/* <FetchApi/> */}
 </main>
     </div>
   )
