@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import LineChart from './Components/LineChart';
 import { data } from 'autoprefixer';
+import Structure from './Components/Structure';
 
 function App() {
   const [dataAPI, setDataApi] = useState([])
@@ -16,8 +17,9 @@ function App() {
 
 
 
- const userData=({ 
+ const userData={ 
   labels:dataAPI.map((t)=>t.dt_txt),
+ 
   datasets:[{
     label:'Temperature',
     data:tmp.map((t)=>(t.temp_min+t.temp_max)/2 ),
@@ -25,6 +27,7 @@ function App() {
     borderColor:'yellow',
     borderWidth:3,
     color:'white',
+    y:"y-axis-1"
   },
 
  {
@@ -34,26 +37,39 @@ function App() {
      borderColor:'black',
      borderWidth:3,
      color:'green',
+     y:"y-axis-1"
  },
  {
+  
      label:'humidity',
      data:tmp.map((t)=>t.humidity),
      backgroundColor:["transparent"],
      borderColor:'indigo',
      borderWidth:2,
-     width:"2rem"
+     width:"2rem",
+     y:"y-axis-2"
+    
  },
 
 ],
 
 
- })
+ }
+ 
+
+//  Options begins
+const options ={
+  maintainAspectRatio:false,
+  scales: {
+    
+  }
+}
 if('geolocation' in navigator){
   navigator.geolocation.watchPosition(function(position){
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
-    // console.log("latitude: "+ latitude)
-    // console.log("Longitude: "+ longitude)
+    console.log("latitude: "+ latitude)
+    console.log("Longitude: "+ longitude)
     navigator.geolocation.clearWatch(position)
 
     axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
@@ -93,25 +109,11 @@ useEffect(() => {
 console.log(tmp.length)
 
   return (   
-     <div className='body'>
-      <input type="text" className='w-full m-auto text-black'/>
-      <main>
- {/* <div className="bar w-[full] h-[20rem] m-auto">  */}
+     <div className='body'> 
+  {/* <LineChart chartData={userData} options={options} /> */}
 
-{/* {tmp.map((x)=>(
-  <p>{x.temp}</p>
-))} */}
-{/* </div>   */}
-{
-  <div className="bar w-[full] h-[20rem] m-auto grid place-items-center"> 
-  <LineChart chartData={userData}/>
-  </div>
-}
+<Structure/>
 
-
-
-{/* <FetchApi/> */}
-</main>
     </div>
   )
 }

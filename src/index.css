@@ -7,12 +7,14 @@
 }
 
 .body{
-    background-image: linear-gradient(115deg, rgba(36, 166, 60, 0.8), rgba(25, 203, 12, 0.7)), url(./media/bg6.jpg);
-    /* background-image: linear-gradient(115deg, rgba(227, 237, 229, 0.928), rgba(200, 209, 199, 0.937)), url(./media/bg6.jpg); */
-
-    @apply w-screen h-auto min-h-screen bg-no-repeat bg-cover bg-center bg-fixed px-10 pt-5
+    @apply w-screen h-auto min-h-screen bg-no-repeat bg-cover bg-center bg-fixed bg-[url(./media/bg7.jpg)] 
 }
 
-main{
-    @apply w-full bg-[#efebe8] h-full bg-opacity-[0.8]
+
+*::-webkit-scrollbar{
+    @apply bg-red-300 w-0
+}
+
+*::selection{
+    @apply bg-[#8892b0] text-[#ccd6f6] bg-opacity-30
 }

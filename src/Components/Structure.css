@@ -1,0 +1,80 @@
+.structureW{
+    @apply w-full h-full flex flex-row
+}
+.stleftW{
+    @apply w-[75%]
+}
+.stleftW .lefttop{
+    @apply w-full h-[75%]
+}
+.stleftW .leftbottom {
+    @apply w-[90%] m-auto h-[25%] border-t-2 border-[rgba(250,250,250,0.3)] 
+}
+.strightW{
+    @apply w-[25%] bg-black bg-opacity-20 h-screen border-l-2 border-[rgba(250,250,250,0.3)]  overflow-hidden py-6
+}
+.inputW{
+    @apply bg-black rounded-full border-white flex w-[90%] h-8 items-center justify-center m-auto gap-2 bg-opacity-20 border-2 border-[rgba(250,250,250,0.3)] 
+}
+.inputW img{
+    @apply w-4
+}
+.inputW button, .inputW input{
+    @apply border-none h-full flex justify-center items-start w-max outline-none bg-transparent
+}
+.deg{
+    @apply h-40 w-full flex flex-col justify-center items-center gap-4
+}
+
+.deg p:first-child{
+    @apply text-3xl font-bold
+}
+
+.deg p:last-child{
+    @apply text-xs text-[white] text-opacity-50
+}
+.divider{
+    @apply h-[1px] w-[90%] bg-white bg-opacity-50 m-auto
+}
+main {
+    @apply flex flex-col gap-6 mt-6 justify-center items-center
+}
+main h1{
+    @apply w-max  text-[1.5rem]
+}
+main .daysW{
+    @apply flex justify-center gap-6
+}
+
+main .daysW p{
+    @apply text-sm bg-black bg-opacity-30 rounded-lg w-[4rem] flex justify-center items-center cursor-pointer hover:bg-white hover:bg-opacity-30
+}
+.sectionW{
+    @apply w-full flex justify-center overflow-y-auto h-[30rem]
+}
+
+.scdsection{
+    @apply overflow-y-auto 
+}
+.scdsection .eachline{
+    @apply flex items-center w-full gap-2 justify-start h-10 mb-5 hover:bg-black hover:bg-opacity-20 cursor-default pl-1 px-2 rounded-lg py-2
+}
+.eachline .eachImg{
+    @apply bg-white bg-opacity-20 rounded-lg
+}
+.eachline .eachImg img{
+    @apply w-10
+}
+.eachline .date p{
+    @apply text-sm text-opacity-70 text-white
+}
+
+.eachline .date p:last-child{
+    @apply text-opacity-50 text-[0.7rem]
+}
+.eachline .temperatures{
+    @apply flex ml-14 gap-2 h-10 items-center
+}
+.eachline .divid {
+    @apply h-8 w-[1px] bg-white bg-opacity-30
+}
