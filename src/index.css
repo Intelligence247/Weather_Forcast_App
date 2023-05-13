@@ -3,13 +3,12 @@
 @tailwind utilities;
 
 *{
-    @apply m-0 p-0 box-border lg:text-base text-sm text-white 
+    @apply m-0 p-0 box-border lg:text-base text-sm text-white font-[monospace] 
 }
 
 .body{
-    @apply w-screen h-auto min-h-screen bg-no-repeat bg-cover bg-center bg-fixed bg-[url(./media/bg7.jpg)] 
+    @apply w-screen h-screen bg-no-repeat bg-cover bg-center bg-fixed bg-[url(./media/bg7.jpg)] overflow-hidden
 }
-
 
 *::-webkit-scrollbar{
     @apply bg-red-300 w-0

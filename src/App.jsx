@@ -13,7 +13,6 @@ function App() {
   const [dataAPI, setDataApi] = useState([])
   const [tmp, setTmp] = useState([])
   const [city, setCity] = useState('Ilorin')
-  console.log(UserData)
 
 
 
@@ -90,9 +89,12 @@ if('geolocation' in navigator){
 // API Fetch
 const fetchData=()=>{
   axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f90a349f83eff086947292eeda42dec&units=metric`)
+  // axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=8.475&lon=4.6727168&appid=9f90a349f83eff086947292eeda42dec&units=metric`)
+
 
   .then(res=>{
       setDataApi(res.data.list)
+      console.log(res.data.list)
       let tmpArr= []
      for(const c of res.data.list){
      tmpArr.push(c.main)

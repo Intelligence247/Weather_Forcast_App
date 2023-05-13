@@ -1,21 +1,37 @@
 import React from 'react'
 import "./Structure.css"
+import Box from './Box'
+import Weatherforms from './Weatherforms'
+import Lefttopleft from './Lefttopleft'
 
 const Structure = () => {
   const days =['5 days','15 days','30 days']
-  const days2= ['','','','','','','','','','','','','','','','']
-  const arr = Array(8)
-  console.log(arr)
+  const days2= ['','','','','','','','','','']
   return (
     <div className='structureW'>
       <div className="stleftW">
-        
-        <div className="lefttop">
 
+        <div className="lefttop">
+          <h1>Weather Forcast App</h1>
+          
+         <Lefttopleft/>
+      
+<div className="lefttopright">
+<div className="chartjsW">
+
+      </div>
+</div>
+      
         </div>
 
         <div className="leftbottom">
-
+          {
+            days2.map((d)=>(
+              <Box/>
+            ))
+    
+          }
+       
         </div>
 
       </div>
