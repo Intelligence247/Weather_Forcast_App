@@ -7,7 +7,8 @@ import { Line } from 'react-chartjs-2';
 import LineChart from './Components/LineChart';
 import Structure from './Components/Structure';
 
-function App() {
+function App(props) {
+
 
   const [city, setCity] = useState('Ilorin')
 

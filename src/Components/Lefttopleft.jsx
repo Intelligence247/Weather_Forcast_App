@@ -1,6 +1,6 @@
 import React from 'react'
 import Weatherforms from './Weatherforms'
-import Structure from './Structure'
+// import Structure from './Structure'
 const Lefttopleft = (props) => {
 const {arr}=props
   

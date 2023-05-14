@@ -13,7 +13,7 @@ const Structure = () => {
   const days =['A Day Interval','3 Hours Interval']
   const days2= ['','','','','','','','']
 
-  
+  const [inputs,setInputs] = useState('')
   const [dataAPI, setDataApi] = useState([])
   const [tmp, setTmp] = useState([])
   const [time, settime] = useState([])
@@ -23,8 +23,9 @@ const Structure = () => {
   const [humidity, sethumidity] = useState([])
   const [wind, setwind] = useState([])
   const [swt, setswt] = useState(0)
-
-  const city= "nigeria"
+ const [city, setCity] = useState('ilorin')
+ const datum = dataAPI
+ console.log(city)
 
   console.log(tmp)
   const fetchData=()=>{
@@ -113,9 +114,10 @@ console.log(dataAPI)
   },
 ]
 const myVariable = "hello world"
+
   return (
-    
-    <div className='structureW'>
+    <div className={`structureW`}>
+
       <div className="stleftW">
 
         <div className="lefttop">
@@ -145,9 +147,16 @@ const myVariable = "hello world"
       </div>
         <div className="strightW">
           <div className="inputW">
-            <input type="text" name="" id="" />
+            <input type="text" 
+            onChange={(e)=> setInputs(e.target.value)}
+            name=""
+             id="" 
+            //  value={city}
+             />
             <img src="/media/map.png" alt="" />
-            <button>search</button>
+            <button
+            onClick={()=>setCity(inputs)}
+            >search</button>
           </div>
 
           <div className="deg">
@@ -216,6 +225,7 @@ temp={tmp[i]}
         </div>
     </div>
   )
+        
 }
 
 export default Structure
