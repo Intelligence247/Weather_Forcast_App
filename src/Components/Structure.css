@@ -57,7 +57,7 @@ main .daysW p{
     @apply text-sm bg-black bg-opacity-30 rounded-lg w-[8rem] flex justify-center items-center cursor-pointer hover:bg-white hover:bg-opacity-30 h-8
 }
 .sectionW{
-    @apply w-full flex justify-center overflow-y-auto h-[30rem]
+    @apply w-full flex justify-center overflow-y-auto h-[28rem]
 }
 
 .scdsection{

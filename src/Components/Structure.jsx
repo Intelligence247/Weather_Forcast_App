@@ -5,9 +5,11 @@ import Weatherforms from './Weatherforms'
 import Lefttopleft from './Lefttopleft'
 import { useEffect } from 'react'
 import axios from 'axios'
+import HourlyndDayily from './HourlyndDayily'
 export const MyContext = React.createContext();
 
 const Structure = () => {
+ 
   const days =['A Day Interval','3 Hours Interval']
   const days2= ['','','','','','','','']
 
@@ -17,6 +19,10 @@ const Structure = () => {
   const [time, settime] = useState([])
   const [desc, setdesc] = useState([])
   const [cityname, setcityname] = useState([])
+  const [pressure, setpressure] = useState([])
+  const [humidity, sethumidity] = useState([])
+  const [wind, setwind] = useState([])
+  const [swt, setswt] = useState(0)
 
   const city= "nigeria"
 
@@ -26,7 +32,11 @@ const Structure = () => {
   // axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=8.475&lon=4.6727168&appid=9f90a349f83eff086947292eeda42dec&units=metric`)
   .then(res=>{
    setDataApi(res.data.list)
+   sethumidity(res.data.list[0].main.humidity)
+   setwind()
+   setpressure(res.data.list[0].main.humidity)
      setcityname(`${res.data.city.name}, ${res.data.city.country}`)
+     setwind(res.data.list[0].wind.speed)
       let tmpArr= []
       let times = []
       let desc =[]
@@ -85,25 +95,26 @@ console.log(dataAPI)
   },
   {
     img:'/media/pressure.png',
-    level: dataAPI[0].main.pressure,
+    level: pressure,
     desc:'Pressure',
     unit:'atm'
   },
   {
     img:'/media/humidity.png',
-    level: dataAPI[0].main.humidity ,
+    level: humidity ,
     desc:'Humidity',
     unit:'%'
   },
   {
     img:'/media/wind.png',
-    level: dataAPI[0].wind.speed,
+    level: wind,
     desc:'Wind',
     unit:'m/s'
   },
 ]
 const myVariable = "hello world"
   return (
+    
     <div className='structureW'>
       <div className="stleftW">
 
@@ -149,34 +160,55 @@ const myVariable = "hello world"
           <div className="daysW">
             {
               days.map((day,i)=>(
-                <p key={i}>{day}</p>
+                <p key={i}
+                onClick={()=>setswt(i)}
+                >{day}</p>
               ))
             }
           </div>
           <div className='sectionW'>
           <section className='scdsection'>
             {
+              swt===0?
+
               alldata1.map((a,i)=>(
                              
-            <div key={i} className="eachline">
-              <div className='eachImg'>
-              <img src="/media/cloud1.png" alt="" />
-              </div>
-              <div className="date">
-                <p>{a.time}</p>
-                <p>{a.desc}</p>
-                </div>
+            // <div key={i} className="eachline">
+            //   <div className='eachImg'>
+            //   <img src="/media/cloud1.png" alt="" />
+            //   </div>
+            //   <div className="date">
+            //     <p>{a.time}</p>
+            //     <p>{a.desc}</p>
+            //     </div>
 
-                <div className="temperatures">
-                  <div className="divid"></div>
-                  <div className="tempshow">
-                  <p>{Math.round(a.temp)}</p>
-                 <p><sup className='text-[0.5rem]'>o</sup>C</p>
-                  </div>
+            //     <div className="temperatures">
+            //       <div className="divid"></div>
+            //       <div className="tempshow">
+            //       <p>{Math.round(a.temp)}</p>
+            //      <p><sup className='text-[0.5rem]'>o</sup>C</p>
+            //       </div>
                  
-                </div>
-            </div>
+            //     </div>
+            // </div>
+            <HourlyndDayily
+            key={i}
+            time={a.time}
+            desc={a.desc}
+            temp={a.temp}
+            />
+
             ))
+:
+time.map((t,i)=>(
+<HourlyndDayily
+key={i}
+time={time[i]}
+desc={desc[i]}
+temp={tmp[i]}
+/>
+))
+
           }
           </section>
           </div>
