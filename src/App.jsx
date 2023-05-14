@@ -1,21 +1,18 @@
 import { useState, useEffect } from 'react'
 import BarChartComponent from './Components/BarChartComponent';
-import { UserData } from './Data';
 import './App.css'
 import FetchApi from './Components/FetchApi';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import LineChart from './Components/LineChart';
-import { data } from 'autoprefixer';
 import Structure from './Components/Structure';
 
 function App() {
-  const [dataAPI, setDataApi] = useState([])
-  const [tmp, setTmp] = useState([])
+
   const [city, setCity] = useState('Ilorin')
 
 
-
+/*
  const userData={ 
   labels:dataAPI.map((t)=>t.dt_txt),
  
@@ -54,7 +51,7 @@ function App() {
 
 
  }
- 
+ */
 
 //  Options begins
 const options ={
@@ -85,30 +82,8 @@ if('geolocation' in navigator){
 }else{
   console.log("geolocation is not supported")
 }
-
 // API Fetch
-const fetchData=()=>{
-  axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f90a349f83eff086947292eeda42dec&units=metric`)
-  // axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=8.475&lon=4.6727168&appid=9f90a349f83eff086947292eeda42dec&units=metric`)
 
-
-  .then(res=>{
-      setDataApi(res.data.list)
-      console.log(res.data.list)
-      let tmpArr= []
-     for(const c of res.data.list){
-     tmpArr.push(c.main)
-     }
-     setTmp(tmpArr)
-  })
-  .catch(err=>{
-      console.log(err+'errrrrrrrrrrr')
-  })
-}
-useEffect(() => {
- fetchData()
-}, []);
-console.log(tmp.length)
 
   return (   
      <div className='body'> 
