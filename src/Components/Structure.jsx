@@ -23,12 +23,11 @@ const Structure = () => {
   const [humidity, sethumidity] = useState([])
   const [wind, setwind] = useState([])
   const [swt, setswt] = useState(0)
+  const [feels, setfeels] = useState([])
  const [city, setCity] = useState('ilorin')
  const datum = dataAPI
- console.log(city)
 
-  console.log(tmp)
-  const fetchData=()=>{
+ const fetchData=()=>{
   axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f90a349f83eff086947292eeda42dec&units=metric`)
   // axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=8.475&lon=4.6727168&appid=9f90a349f83eff086947292eeda42dec&units=metric`)
   .then(res=>{
@@ -41,20 +40,23 @@ const Structure = () => {
       let tmpArr= []
       let times = []
       let desc =[]
+      let feelslike=[]
      for(const c of res.data.list){
      tmpArr.push(c.main.temp)
      times.push(c.dt_txt)
+     feelslike.push(c.main.feels_like)
      desc.push(c.weather[0].description)
      }
      setTmp(tmpArr)
      settime(times)
      setdesc(desc)
+     setfeels(feelslike)
   })
   .catch(err=>{
       console.log(err+'errrrrrrrrrrr')
   })
 }
-console.log(desc)
+
 useEffect(() => {
  fetchData()
 }, []);
@@ -86,7 +88,7 @@ const alldata1=[
   },
 
 ]
-console.log(dataAPI)
+
  const topleftdata = [
   {
     img:'/media/tempimg.png',
@@ -113,7 +115,8 @@ console.log(dataAPI)
     unit:'m/s'
   },
 ]
-const myVariable = "hello world"
+const dailyFeels = [feels[0], feels[7],feels[15],feels[23],feels[33]]
+
 
   return (
     <div className={`structureW`}>
@@ -122,24 +125,34 @@ const myVariable = "hello world"
 
         <div className="lefttop">
           <h1>Weather Forcast App</h1>
-          
+          <div className='flex gap-5'>
+          <div className="lefttopleft">
          <Lefttopleft
          arr={topleftdata}
          city={`${cityname}`}/>
-      
-<div className="lefttopright">
-<div className="chartjsW">
       </div>
+<div className="lefttopright">
+Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis ad iusto odit. Sint maxime, sunt eos reprehenderit ipsam magnam eaque repellendus consectetur. Optio laudantium totam similique recusandae doloribus quaerat pariatur.
 </div>
       
         </div>
-
+</div>
         <div className="leftbottom">
           {
-            days2.map((d,i)=>(
-              <Box key={i} />
+            swt===0?
+            dailyFeels.map((d,i)=>(
+              <Box key={i} 
+              time={i}
+              level={d}
+              />
             ))
-    
+    :
+    feels.map((d,i)=>(
+      <Box key={i} 
+      time={time[i].slice(11,16)}
+      level={d}
+      />
+    ))
           }
        
         </div>

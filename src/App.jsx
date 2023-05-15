@@ -13,46 +13,6 @@ function App(props) {
   const [city, setCity] = useState('Ilorin')
 
 
-/*
- const userData={ 
-  labels:dataAPI.map((t)=>t.dt_txt),
- 
-  datasets:[{
-    label:'Temperature',
-    data:tmp.map((t)=>(t.temp_min+t.temp_max)/2 ),
-    backgroundColor:['green', 'blue', 'yellow','#33323','#5a3242',"#2bcde9"],
-    borderColor:'yellow',
-    borderWidth:3,
-    color:'white',
-    y:"y-axis-1"
-  },
-
- {
-   label:'pressure',
-     data:tmp.map((t)=>t.feels_like),
-     backgroundColor:['green', 'blue', 'yellow','#33323','#5a3242',"#2bcde9"],
-     borderColor:'black',
-     borderWidth:3,
-     color:'green',
-     y:"y-axis-1"
- },
- {
-  
-     label:'humidity',
-     data:tmp.map((t)=>t.humidity),
-     backgroundColor:["transparent"],
-     borderColor:'indigo',
-     borderWidth:2,
-     width:"2rem",
-     y:"y-axis-2"
-    
- },
-
-],
-
-
- }
- */
 
 //  Options begins
 const options ={
@@ -88,7 +48,7 @@ if('geolocation' in navigator){
 
   return (   
      <div className='body'> 
-  {/* <LineChart chartData={userData} options={options} /> */}
+
 
 <Structure/>
 
