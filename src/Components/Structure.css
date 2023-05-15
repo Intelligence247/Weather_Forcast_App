@@ -1,5 +1,5 @@
 .structureW{
-    @apply w-full h-full flex flex-row
+    @apply w-full h-full flex flex-row bg-transparent 
 }
 .stleftW{
     @apply w-[75%]

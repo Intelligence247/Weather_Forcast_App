@@ -182,25 +182,7 @@ const myVariable = "hello world"
 
               alldata1.map((a,i)=>(
                              
-            // <div key={i} className="eachline">
-            //   <div className='eachImg'>
-            //   <img src="/media/cloud1.png" alt="" />
-            //   </div>
-            //   <div className="date">
-            //     <p>{a.time}</p>
-            //     <p>{a.desc}</p>
-            //     </div>
-
-            //     <div className="temperatures">
-            //       <div className="divid"></div>
-            //       <div className="tempshow">
-            //       <p>{Math.round(a.temp)}</p>
-            //      <p><sup className='text-[0.5rem]'>o</sup>C</p>
-            //       </div>
-                 
-            //     </div>
-            // </div>
-            <HourlyndDayily
+           <HourlyndDayily
             key={i}
             time={a.time}
             desc={a.desc}
@@ -221,6 +203,7 @@ temp={tmp[i]}
           }
           </section>
           </div>
+
           </main>
         </div>
     </div>
