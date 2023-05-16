@@ -2,7 +2,7 @@ import React from 'react'
 
 const HourlyndDayily = (props) => {
   return (
-      <div key={props.key} className="eachline">
+      <div  className="eachline">
               <div className='eachImg'>
               <img src="/media/cloud1.png" alt="" />
               </div>

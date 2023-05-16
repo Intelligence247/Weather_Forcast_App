@@ -2,14 +2,14 @@
     @apply w-full h-full flex flex-row bg-transparent 
 }
 .stleftW{
-    @apply w-[75%]
+    @apply w-[75%] flex flex-col
 }
 .stleftW .lefttop{
-    @apply w-full h-[75vh] pt-5 overflow-hidden flex-col
+    @apply w-full h-[75vh] pt-5 overflow-hidden   
 }
 .lefttop > h1{
     background-image: -webkit-linear-gradient(50deg,rgba(190, 183, 176, 0.5),rgba(230,220,250,0.5),rgba(230,240,255,0.5));
-    @apply w-max m-auto text-[2.5rem] h-[3rem] flex justify-center items-center bg-clip-text text-transparent font-[700]
+    @apply w-max m-auto text-[2.5rem] h-[3rem] flex justify-center items-center bg-clip-text text-transparent font-[700] mb-2
 }
 .lefttop .lefttopleft{
     @apply w-[35%] border-r-2 h-full border-white border-opacity-30
@@ -89,5 +89,5 @@ main .daysW p{
 
 /* lefttopright */
 .lefttop .lefttopright{
-    @apply w-[65%] bg-red-600 h-full
+    @apply w-[65%] h-full mr-6
 }

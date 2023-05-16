@@ -6,11 +6,13 @@ import Lefttopleft from './Lefttopleft'
 import { useEffect } from 'react'
 import axios from 'axios'
 import HourlyndDayily from './HourlyndDayily'
+import App from '../App'
+import LineChart from './LineChart'
 export const MyContext = React.createContext();
 
 const Structure = () => {
- 
-  const days =['A Day Interval','3 Hours Interval']
+
+  let days =['A Day Interval','3 Hours Interval']
   const days2= ['','','','','','','','']
 
   const [inputs,setInputs] = useState('')
@@ -24,7 +26,7 @@ const Structure = () => {
   const [wind, setwind] = useState([])
   const [swt, setswt] = useState(0)
   const [feels, setfeels] = useState([])
- const [city, setCity] = useState('ilorin')
+ const [city, setCity] = useState('')
  const datum = dataAPI
 
  const fetchData=()=>{
@@ -117,22 +119,78 @@ const alldata1=[
 ]
 const dailyFeels = [feels[0], feels[7],feels[15],feels[23],feels[33]]
 
+// chartjs
+  
+const userData={ 
+  labels:alldata1.map((t)=>t.time),
+ 
+  datasets:[{
+    label:'Temperature',
+    fill: {
+      target: "origin",
+      above: "rgba(0,0,0,0.3)",
+      below:'red'
+    },
+    data: alldata1.map((t)=>(t.temp)),
+     backgroundColor:"rgba(0,0,0,0.4)",
+    borderColor:'rgba(0,0,0,0.6)',
+    borderWidth:2,
+    pointBorderWidth:1,
+    pointRadius:8,
+    pointBackgroundColor: 'white',
+    pointHoverRadius:16,
+    pointStyle: "star",
+     },
+  
+],
 
+options: {
+  responsive:true,
+  scales: {
+    y: {
+      ticks: {
+        fontColor: 'purple', // Change the color of y-axis labels
+      }
+    }
+  },
+  plugins: {
+    title: {
+      display: true,
+      text: 'Chart Title',
+      fontColor: 'blue' // Change the color of the chart title
+    },
+    legend: {
+      labels: {
+        fontColor: 'green' // Change the color of legend labels
+      }
+    },
+    tooltip: {
+      titleColor: 'purple', // Change the color of tooltip title
+      bodyColor: 'orange' // Change the color of tooltip body
+    }
+  }
+
+}}
   return (
-    <div className={`structureW`}>
+    <div className='grid place-items-center'>
+
+    {dataAPI.length>1?
+    <div className='structureW'>
 
       <div className="stleftW">
 
         <div className="lefttop">
           <h1>Weather Forcast App</h1>
           <div className='flex gap-5'>
-          <div className="lefttopleft">
+          <div className="">
          <Lefttopleft
          arr={topleftdata}
          city={`${cityname}`}/>
       </div>
-<div className="lefttopright">
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis ad iusto odit. Sint maxime, sunt eos reprehenderit ipsam magnam eaque repellendus consectetur. Optio laudantium totam similique recusandae doloribus quaerat pariatur.
+<div className="lefttopright bg-transparent">
+<LineChart chartData={userData}
+options={userData.options}
+/>
 </div>
       
         </div>
@@ -161,8 +219,7 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis ad iusto odit. S
         <div className="strightW">
           <div className="inputW">
             <input type="text" 
-            onChange={(e)=> setInputs(e.target.value)}
-            name=""
+            onChange={(e)=> setCity(e.target.value)}
              id="" 
             //  value={city}
              />
@@ -220,8 +277,17 @@ temp={tmp[i]}
           </main>
         </div>
     </div>
+    :
+    <div className='w-full h-screen grid place-content-center'>
+      <h1 className='text-[2rem] leading-[4rem]'>Welcome to my Weather App</h1>
+      <input className='w-[30rem] text-red-400' placeholder='Enter the name of your city for forcast' type="text"
+      onChange={(e)=>setCity(e.target.value)}
+       />
+    </div>
+    }
+  </div>   
+
   )
-        
 }
 
 export default Structure

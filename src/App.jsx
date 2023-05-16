@@ -7,11 +7,10 @@ import { Line } from 'react-chartjs-2';
 import LineChart from './Components/LineChart';
 import Structure from './Components/Structure';
 
-function App(props) {
+function App() {
 
 
   const [city, setCity] = useState('Ilorin')
-
 
 
 //  Options begins
@@ -43,14 +42,13 @@ if('geolocation' in navigator){
 }else{
   console.log("geolocation is not supported")
 }
-// API Fetch
 
 
   return (   
+   
      <div className='body'> 
-
-
-<Structure/>
+  <Structure/>
+  
 
     </div>
   )
