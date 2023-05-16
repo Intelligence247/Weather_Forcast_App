@@ -26,7 +26,7 @@ const Structure = () => {
   const [wind, setwind] = useState([])
   const [swt, setswt] = useState(0)
   const [feels, setfeels] = useState([])
- const [city, setCity] = useState('')
+ const [city, setCity] = useState('china')
  const datum = dataAPI
 
  const fetchData=()=>{
