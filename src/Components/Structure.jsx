@@ -26,15 +26,19 @@ const Structure = () => {
   const [wind, setwind] = useState([])
   const [swt, setswt] = useState(0)
   const [feels, setfeels] = useState([])
- const [city, setCity] = useState('china')
+  const [main, setmain] = useState([])
+ const [city, setCity] = useState('Ilorin')
  const datum = dataAPI
-
- const fetchData=()=>{
-  axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f90a349f83eff086947292eeda42dec&units=metric`)
+ 
+const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f90a349f83eff086947292eeda42dec&units=metric`
   // axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=8.475&lon=4.6727168&appid=9f90a349f83eff086947292eeda42dec&units=metric`)
+
+ const fetchData= (e)=>{
+  axios.get(url)
   .then(res=>{
    setDataApi(res.data.list)
    sethumidity(res.data.list[0].main.humidity)
+
    setwind()
    setpressure(res.data.list[0].main.humidity)
      setcityname(`${res.data.city.name}, ${res.data.city.country}`)
@@ -43,19 +47,27 @@ const Structure = () => {
       let times = []
       let desc =[]
       let feelslike=[]
+      let main = []
      for(const c of res.data.list){
      tmpArr.push(c.main.temp)
      times.push(c.dt_txt)
      feelslike.push(c.main.feels_like)
      desc.push(c.weather[0].description)
+     main.push(c.weather[0].main)
      }
+    
      setTmp(tmpArr)
      settime(times)
      setdesc(desc)
      setfeels(feelslike)
+     setmain(main)
+     console.log(main)
+
+
   })
   .catch(err=>{
       console.log(err+'errrrrrrrrrrr')
+      setCity('')
   })
 }
 
@@ -68,25 +80,33 @@ const alldata1=[
     time: time[0],
     temp: tmp[0],
     desc: desc[0],
+    main: main[0]
   },{
     time: time[7],
     temp: tmp[7],
     desc: desc[7],
+    main: main[7],
   },
   {
     time: time[15],
     temp: tmp[15],
     desc: desc[15],
+    main: main[15],
+
   },
   {
     time: time[23],
     temp: tmp[23],
     desc: desc[23],
+    main: main[23],
+    
   },
   {
     time: time[33],
     temp: tmp[33],
     desc: desc[33],
+    main: main[33],
+
   },
 
 ]
@@ -171,6 +191,10 @@ options: {
   }
 
 }}
+// const handleInputs=(e)=>{
+// e.preventDefault()
+// setCity(e.target.value)
+// }
   return (
     <div className='grid place-items-center'>
 
@@ -217,16 +241,18 @@ options={userData.options}
 
       </div>
         <div className="strightW">
-          <div className="inputW">
+          <div className="">
+            <form className='inputW' onSubmit={fetchData}>
             <input type="text" 
-            onChange={(e)=> setCity(e.target.value)}
+            onChange={(e)=>setCity(e.target.value)}
              id="" 
-            //  value={city}
+
+             value={city}
              />
             <img src="/media/map.png" alt="" />
-            <button
-            onClick={()=>setCity(inputs)}
-            >search</button>
+             {/* <button
+            >search</button>  */}
+            </form>
           </div>
 
           <div className="deg">
@@ -257,6 +283,7 @@ options={userData.options}
             time={a.time}
             desc={a.desc}
             temp={a.temp}
+            img={a.main}
             />
 
             ))
@@ -267,6 +294,7 @@ key={i}
 time={time[i]}
 desc={desc[i]}
 temp={tmp[i]}
+img={main[i]}
 />
 ))
 
@@ -279,10 +307,15 @@ temp={tmp[i]}
     </div>
     :
     <div className='w-full h-screen grid place-content-center'>
+      <form onSubmit={fetchData}
+      className='w-full h-screen grid place-content-center'
+      >
       <h1 className='text-[2rem] leading-[4rem]'>Welcome to my Weather App</h1>
       <input className='w-[30rem] text-red-400' placeholder='Enter the name of your city for forcast' type="text"
+      value={city}
       onChange={(e)=>setCity(e.target.value)}
        />
+       </form>
     </div>
     }
   </div>   

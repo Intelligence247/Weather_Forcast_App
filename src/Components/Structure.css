@@ -70,7 +70,7 @@ main .daysW p{
     @apply bg-white bg-opacity-20 rounded-lg
 }
 .eachline .eachImg img{
-    @apply w-10
+    @apply w-10 opacity-80
 }
 .eachline .date p{
     @apply text-sm text-opacity-70 text-white

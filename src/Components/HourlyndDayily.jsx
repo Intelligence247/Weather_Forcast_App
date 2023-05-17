@@ -4,7 +4,7 @@ const HourlyndDayily = (props) => {
   return (
       <div  className="eachline">
               <div className='eachImg'>
-              <img src="/media/cloud1.png" alt="" />
+              <img src={`/media/${props.img}.png`} alt="" />
               </div>
               <div className="date">
                 <p>{props.time}</p>
