@@ -80,7 +80,7 @@ main .daysW p{
     @apply text-opacity-50 text-[0.7rem]
 }
 .eachline .temperatures{
-    @apply flex ml-14 gap-2 h-10 items-center
+    @apply flex ml-6 gap-2 h-10 items-center
 }
 .eachline .divid {
     @apply h-8 w-[1px] bg-white bg-opacity-30

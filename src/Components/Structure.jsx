@@ -191,10 +191,8 @@ options: {
   }
 
 }}
-// const handleInputs=(e)=>{
-// e.preventDefault()
-// setCity(e.target.value)
-// }
+
+const months = ["January", 'February', 'March', "April", 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   return (
     <div className='grid place-items-center'>
 
@@ -242,7 +240,7 @@ options={userData.options}
       </div>
         <div className="strightW">
           <div className="">
-            <form className='inputW' onSubmit={fetchData}>
+            <form className='inputW' onSubmit={fetchData()}>
             <input type="text" 
             onChange={(e)=>setCity(e.target.value)}
              id="" 
@@ -256,6 +254,7 @@ options={userData.options}
           </div>
 
           <div className="deg">
+            <img src={`/media/${main[0]}.png`} alt="" />
             <p>{Math.round(alldata1[0].temp)}<sup>o</sup>C</p>
             <p>{alldata1[0].desc}</p>
           </div>
@@ -280,7 +279,7 @@ options={userData.options}
                              
            <HourlyndDayily
             key={i}
-            time={a.time}
+            time={months[parseInt(a.time.slice(5,7))] +' '+ a.time.slice(8,11)}
             desc={a.desc}
             temp={a.temp}
             img={a.main}
@@ -291,7 +290,8 @@ options={userData.options}
 time.map((t,i)=>(
 <HourlyndDayily
 key={i}
-time={time[i]}
+time={months[parseInt(time[i].slice(5,7))] +' '+ time[i].slice(8,11)}
+
 desc={desc[i]}
 temp={tmp[i]}
 img={main[i]}
@@ -307,7 +307,7 @@ img={main[i]}
     </div>
     :
     <div className='w-full h-screen grid place-content-center'>
-      <form onSubmit={fetchData}
+      <form onSubmit={fetchData()}
       className='w-full h-screen grid place-content-center'
       >
       <h1 className='text-[2rem] leading-[4rem]'>Welcome to my Weather App</h1>

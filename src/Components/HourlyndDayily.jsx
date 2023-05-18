@@ -6,7 +6,7 @@ const HourlyndDayily = (props) => {
               <div className='eachImg'>
               <img src={`/media/${props.img}.png`} alt="" />
               </div>
-              <div className="date">
+              <div className="date w-[10rem]">
                 <p>{props.time}</p>
                 <p>{props.desc}</p>
                 </div>
