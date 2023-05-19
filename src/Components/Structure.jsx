@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import "./Structure.css"
 import Box from './Box'
-import Weatherforms from './Weatherforms'
 import Lefttopleft from './Lefttopleft'
 import { useEffect } from 'react'
 import axios from 'axios'
 import HourlyndDayily from './HourlyndDayily'
 import App from '../App'
 import LineChart from './LineChart'
+import DefaultInputs from './DefaultInputs'
 export const MyContext = React.createContext();
 
 const Structure = () => {
@@ -27,14 +27,20 @@ const Structure = () => {
   const [swt, setswt] = useState(0)
   const [feels, setfeels] = useState([])
   const [main, setmain] = useState([])
- const [city, setCity] = useState('Ilorin')
+ const [city, setCity] = useState('')
  const datum = dataAPI
  
 const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f90a349f83eff086947292eeda42dec&units=metric`
   // axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=8.475&lon=4.6727168&appid=9f90a349f83eff086947292eeda42dec&units=metric`)
 
- const fetchData= (e)=>{
-  axios.get(url)
+
+// const fecth = (params)=>{
+//   const result = axios.get(`url/${params}`).then()
+// }
+
+ const fetchData=  async (params)=>{
+  params.preventDefault()
+  axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=b52ebf3479c0ba50f0f006fd016ff13e&units=metric`)
   .then(res=>{
    setDataApi(res.data.list)
    sethumidity(res.data.list[0].main.humidity)
@@ -42,6 +48,7 @@ const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f
    setwind()
    setpressure(res.data.list[0].main.humidity)
      setcityname(`${res.data.city.name}, ${res.data.city.country}`)
+     setCity(`${res.data.city.name}`)
      setwind(res.data.list[0].wind.speed)
       let tmpArr= []
       let times = []
@@ -54,6 +61,7 @@ const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f
      feelslike.push(c.main.feels_like)
      desc.push(c.weather[0].description)
      main.push(c.weather[0].main)
+     
      }
     
      setTmp(tmpArr)
@@ -62,12 +70,13 @@ const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f
      setfeels(feelslike)
      setmain(main)
      console.log(main)
+   setCity('')
+
 
 
   })
   .catch(err=>{
-      console.log(err+'errrrrrrrrrrr')
-      setCity('')
+    console.log(err+' '+'Error here')
   })
 }
 
@@ -138,9 +147,10 @@ const alldata1=[
   },
 ]
 const dailyFeels = [feels[0], feels[7],feels[15],feels[23],feels[33]]
-
-// chartjs
   
+const months = ["January", 'February', 'March', "April", 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+
 const userData={ 
   labels:alldata1.map((t)=>t.time),
  
@@ -148,12 +158,11 @@ const userData={
     label:'Temperature',
     fill: {
       target: "origin",
-      above: "rgba(0,0,0,0.3)",
-      below:'red'
+      above: "rgba(0,0,0,0.5)",
+  
     },
     data: alldata1.map((t)=>(t.temp)),
-     backgroundColor:"rgba(0,0,0,0.4)",
-    borderColor:'rgba(0,0,0,0.6)',
+    borderColor:'rgba(255,255,255,0.6)',
     borderWidth:2,
     pointBorderWidth:1,
     pointRadius:8,
@@ -169,7 +178,7 @@ options: {
   scales: {
     y: {
       ticks: {
-        fontColor: 'purple', // Change the color of y-axis labels
+        fontColor: 'yellow', // Change the color of y-axis labels
       }
     }
   },
@@ -185,16 +194,16 @@ options: {
       }
     },
     tooltip: {
-      titleColor: 'purple', // Change the color of tooltip title
-      bodyColor: 'orange' // Change the color of tooltip body
+      titleColor: '#2c7098', // Change the color of tooltip title
+      bodyColor: '#2c7098' // Change the color of tooltip body
     }
   }
 
 }}
 
-const months = ["January", 'February', 'March', "April", 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  return (
-    <div className='grid place-items-center'>
+
+return (
+    <div className='grid w-screen h-screen place-items-center overflow-hidden'>
 
     {dataAPI.length>1?
     <div className='structureW'>
@@ -218,19 +227,22 @@ options={userData.options}
         </div>
 </div>
         <div className="leftbottom">
+          <p className='fixed mr-[4rem] h-[8rem] px-2 grid place-items-center bg-[#203d52] bg-opacity-90 '>Feels Like</p>
           {
             swt===0?
-            dailyFeels.map((d,i)=>(
+            alldata1.map((d,i)=>(
               <Box key={i} 
-              time={i}
-              level={d}
+              time={months[parseInt(d.time.slice(5,7))] +' '+ d.time.slice(8,11)}
+              level={Math.round(dailyFeels[i])}
+              img={d.main}
               />
             ))
     :
     feels.map((d,i)=>(
       <Box key={i} 
       time={time[i].slice(11,16)}
-      level={d}
+      level={Math.round(d)}
+      img={main[i]}
       />
     ))
           }
@@ -240,17 +252,19 @@ options={userData.options}
       </div>
         <div className="strightW">
           <div className="">
-            <form className='inputW' onSubmit={fetchData()}>
+             <form className='inputW' onSubmit={fetchData}>
             <input type="text" 
             onChange={(e)=>setCity(e.target.value)}
+
              id="" 
 
              value={city}
              />
+             {/* <button onClick={()=>handleClicks}>search</button> */}
             <img src="/media/map.png" alt="" />
-             {/* <button
-            >search</button>  */}
-            </form>
+             <button
+            >search</button> 
+            </form> 
           </div>
 
           <div className="deg">
@@ -290,7 +304,7 @@ options={userData.options}
 time.map((t,i)=>(
 <HourlyndDayily
 key={i}
-time={months[parseInt(time[i].slice(5,7))] +' '+ time[i].slice(8,11)}
+time={months[parseInt(time[i].slice(5,7))] +' '+ time[i].slice(8,11)+' '+time[i].slice(11,16)}
 
 desc={desc[i]}
 temp={tmp[i]}
@@ -306,17 +320,11 @@ img={main[i]}
         </div>
     </div>
     :
-    <div className='w-full h-screen grid place-content-center'>
-      <form onSubmit={fetchData()}
-      className='w-full h-screen grid place-content-center'
-      >
-      <h1 className='text-[2rem] leading-[4rem]'>Welcome to my Weather App</h1>
-      <input className='w-[30rem] text-red-400' placeholder='Enter the name of your city for forcast' type="text"
-      value={city}
-      onChange={(e)=>setCity(e.target.value)}
-       />
-       </form>
-    </div>
+    <DefaultInputs
+    setCity={setCity}
+    city={city}
+    fetchData={fetchData}
+    />
     }
   </div>   
 
