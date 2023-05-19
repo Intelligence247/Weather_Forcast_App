@@ -8,7 +8,7 @@
 - Reactjs
 - TailwindCss
 ## Preview here
-[Go Live](phenomenal-sunshine-547717.netlify.app/)
+[Go Live](https://phenomenal-sunshine-547717.netlify.app/)
 
 ![screenshot](/public/media/Short.png)
 ## Contact

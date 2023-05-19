@@ -150,9 +150,16 @@ const dailyFeels = [feels[0], feels[7],feels[15],feels[23],feels[33]]
   
 const months = ["January", 'February', 'March', "April", 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
+let monthdata=[]
+if (dataAPI.length>1){
+  for(const a of alldata1){
+ monthdata.push(months[parseInt(a.time.slice(5,7))] +' '+ a.time.slice(8,11))
+  }
+}
+// console.log(monthdata, "I am here")
 
 const userData={ 
-  labels:alldata1.map((t)=>t.time),
+  labels: monthdata.map((m)=>m),
  
   datasets:[{
     label:'Temperature',
@@ -175,18 +182,20 @@ const userData={
 
 options: {
   responsive:true,
+  
   scales: {
     y: {
-      ticks: {
-        fontColor: 'yellow', // Change the color of y-axis labels
-      }
+      color: 'red',
+    },
+    x:{
+      color:'green'
     }
   },
   plugins: {
     title: {
       display: true,
       text: 'Chart Title',
-      fontColor: 'blue' // Change the color of the chart title
+      fontColor: 'green' // Change the color of the chart title
     },
     legend: {
       labels: {
@@ -227,12 +236,12 @@ options={userData.options}
         </div>
 </div>
         <div className="leftbottom">
-          <p className='fixed mr-[4rem] h-[8rem] px-2 grid place-items-center bg-[#203d52] bg-opacity-90 '>Feels Like</p>
+          <p className='fixed mr-[4rem] h-[8rem] px-0 grid place-items-center  bg-[url(/media/bg2.jpg)] bg-center bg-cover text-[1.2rem] font-[700]'>Feels Like</p>
           {
             swt===0?
             alldata1.map((d,i)=>(
               <Box key={i} 
-              time={months[parseInt(d.time.slice(5,7))] +' '+ d.time.slice(8,11)}
+              time={monthdata[i]}
               level={Math.round(dailyFeels[i])}
               img={d.main}
               />
