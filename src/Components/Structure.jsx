@@ -28,7 +28,8 @@ const Structure = () => {
   const [main, setmain] = useState([])
  const [city, setCity] = useState('')
  const [errM,setErrM] = useState('')
- const [booleanErr, setbooleanErr] = useState('')
+  const [booleanErr, setbooleanErr] = useState('')
+  const [flow, setflow] = useState()
  const datum = dataAPI
  
 const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f90a349f83eff086947292eeda42dec&units=metric`
@@ -41,16 +42,16 @@ const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f
 
  const fetchData=  async (params)=>{
   params.preventDefault()
-  axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f90a349f83eff086947292eeda42dec&units=metric`)
+  axios.get(url)
   .then(res=>{
    setDataApi(res.data.list)
    sethumidity(res.data.list[0].main.humidity)
 
-   setwind()
+   setwind(res.data.list[0].wind.speed)
+   setflow(res.data.list[0].wind)
    setpressure(res.data.list[0].main.pressure)
      setcityname(`${res.data.city.name}, ${res.data.city.country}`)
      setCity(`${res.data.city.name}`)
-     setwind(res.data.list[0].wind.speed)
       let tmpArr= []
       let times = []
       let desc =[]
@@ -183,29 +184,7 @@ const userData={
     tension:0.3,
 
     
-     },
-  //    {
-  //     label:'Feels Like',
-  //     fill:{
-  //       target:'origin',
-  //       above:"255,0,255,0.4",
-        
-
-  //     },
-  // data: dailyFeels.map((t)=>(t)),
-  // borderColor:'rgba(255,255,255,0.6)',
-  // borderWidth:2,
-  // pointBorderWidth:1,
-  // pointRadius:8,
-  // pointBackgroundColor: 'transparent',
-  // pointHoverRadius:12,
-  // pointStyle: "rectRounded",
-  // tension:0.3,
-  // // backgroundColor:'red'
-
-
-  //    }
-  
+     },  
 ],
 
 
@@ -246,7 +225,7 @@ options: {
 console.log(errM)
 
 return (
-    <div className='grid w-screen h-screen place-items-center overflow-hidden'>
+    <div className='grid w-full h-full place-items-center'>
 
     {dataAPI.length>1?
     <div className='structureW'>
@@ -255,21 +234,24 @@ return (
 
         <div className="lefttop">
           <h1>Weather Forcast App</h1>
-          <div className='flex gap-5'>
-          <div className="">
+          <div className=' flex lg:flex-row flex-col gap-5'>
+          {/* <div className=""> */}
          <Lefttopleft
          arr={topleftdata}
          city={`${cityname}`}/>
-      </div><div className="lefttopright bg-[#000f20] ">
+      {/* </div> */}
+      <div className="lefttopright">
 <LineChart chartData={userData}
 options={userData.options}
 />
+<p className='mb-4 lg:w-max w-full flex text-center m-auto lg:text-[1.2rem] text-[1rem] text-[#3594ca] text-opacity-50'>The wind is currently blowing from {flow.deg>=0 && flow.deg<90?'North to South':flow.deg>=90 && flow.deg<180?'East to West':flow.deg>=180 && flow.deg<270?"South to North":flow.deg>=270 && flow.deg<=360?'West to East':''}</p>
+
 </div>
       
         </div>
 </div>
-        <div className="leftbottom">
-          <p className='fixed mr-[4rem] h-[8rem] px-0 grid place-items-center  bg-[url(/media/moody.jpg)] bg-center bg-cover text-[1.2rem] font-[700]'>Feels Like</p>
+        <div className="leftbottom relative">
+          <p className='lg:fixed absolute left-1 bottom-2 mr-[4rem] lg:h-[8rem] h-[7rem] px-0 grid place-items-center  bg-[url(/media/moody.jpg)] bg-center bg-cover text-[1.2rem] font-[700]'>Feels Like</p>
           {
             swt===0?
             alldata1.map((d,i)=>(
