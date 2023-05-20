@@ -30,15 +30,17 @@
     @apply border-none h-full flex justify-center items-start w-max outline-none bg-transparent
 }
 .deg{
-    @apply h-40 w-full flex flex-col justify-center items-center gap-4
+    @apply h-40 w-full flex flex-col justify-center items-center gap-2
 }
 
-.deg p:first-child{
-    @apply text-3xl font-bold
+.deg p:nth-child(2){
+    @apply text-[3rem] font-bold leading-3
 }
-
+.deg img{
+    @apply w-[8rem] h-[6rem]
+}
 .deg p:last-child{
-    @apply text-xs text-[white] text-opacity-50
+    @apply text-xs text-[white] text-opacity-50 mt-2
 }
 .divider{
     @apply h-[1px] w-[90%] bg-white bg-opacity-50 m-auto

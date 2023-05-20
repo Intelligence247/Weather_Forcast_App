@@ -15,7 +15,6 @@ const Structure = () => {
   let days =['A Day Interval','3 Hours Interval']
   const days2= ['','','','','','','','']
 
-  const [inputs,setInputs] = useState('')
   const [dataAPI, setDataApi] = useState([])
   const [tmp, setTmp] = useState([])
   const [time, settime] = useState([])
@@ -28,10 +27,12 @@ const Structure = () => {
   const [feels, setfeels] = useState([])
   const [main, setmain] = useState([])
  const [city, setCity] = useState('')
+ const [errM,setErrM] = useState('')
+ const [booleanErr, setbooleanErr] = useState('')
  const datum = dataAPI
  
 const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f90a349f83eff086947292eeda42dec&units=metric`
-  // axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=8.475&lon=4.6727168&appid=9f90a349f83eff086947292eeda42dec&units=metric`)
+  // axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=8.475&lon=4.6727168&appid=b52ebf3479c0ba50f0f006fd016ff13e&units=metric`)
 
 
 // const fecth = (params)=>{
@@ -40,13 +41,13 @@ const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f
 
  const fetchData=  async (params)=>{
   params.preventDefault()
-  axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=b52ebf3479c0ba50f0f006fd016ff13e&units=metric`)
+  axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f90a349f83eff086947292eeda42dec&units=metric`)
   .then(res=>{
    setDataApi(res.data.list)
    sethumidity(res.data.list[0].main.humidity)
 
    setwind()
-   setpressure(res.data.list[0].main.humidity)
+   setpressure(res.data.list[0].main.pressure)
      setcityname(`${res.data.city.name}, ${res.data.city.country}`)
      setCity(`${res.data.city.name}`)
      setwind(res.data.list[0].wind.speed)
@@ -72,13 +73,16 @@ const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f
      console.log(main)
    setCity('')
 
-
+setbooleanErr(false)
 
   })
   .catch(err=>{
     console.log(err+' '+'Error here')
+    setbooleanErr(true)
+    setErrM(err)
   })
 }
+console.log(errM.length)
 
 useEffect(() => {
  fetchData()
@@ -165,7 +169,7 @@ const userData={
     label:'Temperature',
     fill: {
       target: "origin",
-      above: "rgba(0,0,0,0.5)",
+      above: "rgba(120,120,120,0.3)",
   
     },
     data: alldata1.map((t)=>(t.temp)),
@@ -173,28 +177,57 @@ const userData={
     borderWidth:2,
     pointBorderWidth:1,
     pointRadius:8,
-    pointBackgroundColor: 'white',
+    pointBackgroundColor: 'transparent',
     pointHoverRadius:16,
     pointStyle: "star",
+    tension:0.3,
+
+    
      },
+  //    {
+  //     label:'Feels Like',
+  //     fill:{
+  //       target:'origin',
+  //       above:"255,0,255,0.4",
+        
+
+  //     },
+  // data: dailyFeels.map((t)=>(t)),
+  // borderColor:'rgba(255,255,255,0.6)',
+  // borderWidth:2,
+  // pointBorderWidth:1,
+  // pointRadius:8,
+  // pointBackgroundColor: 'transparent',
+  // pointHoverRadius:12,
+  // pointStyle: "rectRounded",
+  // tension:0.3,
+  // // backgroundColor:'red'
+
+
+  //    }
   
 ],
+
+
 
 options: {
   responsive:true,
   
   scales: {
-    y: {
+    x: {
       color: 'red',
     },
-    x:{
-      color:'green'
+    y:{
+      color:'green',
+      grid: {
+        display:true,
+      }
     }
   },
   plugins: {
     title: {
       display: true,
-      text: 'Chart Title',
+      text: 'Graphical Representations of Temperature',
       fontColor: 'green' // Change the color of the chart title
     },
     legend: {
@@ -210,6 +243,7 @@ options: {
 
 }}
 
+console.log(errM)
 
 return (
     <div className='grid w-screen h-screen place-items-center overflow-hidden'>
@@ -226,8 +260,7 @@ return (
          <Lefttopleft
          arr={topleftdata}
          city={`${cityname}`}/>
-      </div>
-<div className="lefttopright bg-transparent">
+      </div><div className="lefttopright bg-[#000f20] ">
 <LineChart chartData={userData}
 options={userData.options}
 />
@@ -236,7 +269,7 @@ options={userData.options}
         </div>
 </div>
         <div className="leftbottom">
-          <p className='fixed mr-[4rem] h-[8rem] px-0 grid place-items-center  bg-[url(/media/bg2.jpg)] bg-center bg-cover text-[1.2rem] font-[700]'>Feels Like</p>
+          <p className='fixed mr-[4rem] h-[8rem] px-0 grid place-items-center  bg-[url(/media/moody.jpg)] bg-center bg-cover text-[1.2rem] font-[700]'>Feels Like</p>
           {
             swt===0?
             alldata1.map((d,i)=>(
@@ -260,7 +293,7 @@ options={userData.options}
 
       </div>
         <div className="strightW">
-          <div className="">
+          <div className="flex justify-center items-center flex-col">
              <form className='inputW' onSubmit={fetchData}>
             <input type="text" 
             onChange={(e)=>setCity(e.target.value)}
@@ -269,11 +302,11 @@ options={userData.options}
 
              value={city}
              />
-             {/* <button onClick={()=>handleClicks}>search</button> */}
             <img src="/media/map.png" alt="" />
              <button
             >search</button> 
             </form> 
+            <p className='text-[1rem] text-red-500 uppercase h-7'>{booleanErr?`${errM.response.data.message}`:""}</p>
           </div>
 
           <div className="deg">
@@ -333,6 +366,7 @@ img={main[i]}
     setCity={setCity}
     city={city}
     fetchData={fetchData}
+    errM={booleanErr?`${errM.response.data.message}`:""}
     />
     }
   </div>   
