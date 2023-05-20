@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react'
-import BarChartComponent from './Components/BarChartComponent';
 import './App.css'
-import FetchApi from './Components/FetchApi';
 import axios from 'axios';
-import { Line } from 'react-chartjs-2';
-import LineChart from './Components/LineChart';
 import Structure from './Components/Structure';
 
 function App() {
 
 
   const [city, setCity] = useState('Ilorin')
-
+  const [lat, setlat] = useState('')
+  const [lon, setlon] = useState('')
 
 //  Options begins
 const options ={
@@ -26,14 +23,10 @@ if('geolocation' in navigator){
     let longitude = position.coords.longitude;
     console.log("latitude: "+ latitude)
     console.log("Longitude: "+ longitude)
+    setlat(latitude)
+    setlon(longitude)
     navigator.geolocation.clearWatch(position)
 
-    axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
-    .then(data=>{
-      // const city = data.address.city;
-      // console.log(city)
-    })
-    .catch((err)=>console.log(err))
   },
   function(err){
     console.error('Error getting geoloacation: ', err)
@@ -43,14 +36,25 @@ if('geolocation' in navigator){
   console.log("geolocation is not supported")
 }
 
+const fetchdata= ()=>{
+  axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=b52ebf3479c0ba50f0f006fd016ff13e&units=metric`)
+  .then(res=>{
+    console.log(res.data)
+
+  })
+  .catch(err=>{
+    console.log(err)
+  })
+}
+useEffect(() => {
+  fetchdata()
+}, [])
 
   return (   
    
      <div className='body'> 
   <Structure/>
-  
-
-    </div>
+      </div>
   )
 }
 

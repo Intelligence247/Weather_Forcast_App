@@ -36,10 +36,6 @@ const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f
   // axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=8.475&lon=4.6727168&appid=b52ebf3479c0ba50f0f006fd016ff13e&units=metric`)
 
 
-// const fecth = (params)=>{
-//   const result = axios.get(`url/${params}`).then()
-// }
-
  const fetchData=  async (params)=>{
   params.preventDefault()
   axios.get(url)
@@ -71,7 +67,6 @@ const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f
      setdesc(desc)
      setfeels(feelslike)
      setmain(main)
-     console.log(main)
    setCity('')
 
 setbooleanErr(false)
@@ -83,7 +78,6 @@ setbooleanErr(false)
     setErrM(err)
   })
 }
-console.log(errM.length)
 
 useEffect(() => {
  fetchData()
@@ -161,7 +155,6 @@ if (dataAPI.length>1){
  monthdata.push(months[parseInt(a.time.slice(5,7))] +' '+ a.time.slice(8,11))
   }
 }
-// console.log(monthdata, "I am here")
 
 const userData={ 
   labels: monthdata.map((m)=>m),
@@ -222,7 +215,6 @@ options: {
 
 }}
 
-console.log(errM)
 
 return (
     <div className='grid w-full h-full place-items-center'>
