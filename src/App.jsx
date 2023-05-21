@@ -4,12 +4,9 @@ import axios from 'axios';
 import Structure from './Components/Structure';
 
 function App() {
-
-
-  const [city, setCity] = useState('Ilorin')
-  const [lat, setlat] = useState('')
-  const [lon, setlon] = useState('')
-
+  const [lat, setlat] = useState(0)
+  const [lon, setlon] = useState(0)
+  const [errG, seterrG] = useState('')
 //  Options begins
 const options ={
   maintainAspectRatio:false,
@@ -30,6 +27,7 @@ if('geolocation' in navigator){
   },
   function(err){
     console.error('Error getting geoloacation: ', err)
+    seterrG(err.message)
       });
   
 }else{
@@ -49,11 +47,17 @@ const fetchdata= ()=>{
 useEffect(() => {
   fetchdata()
 }, [])
+console.log(lat.length)
+console.log(lat)
 
   return (   
    
      <div className='body'> 
-  <Structure/>
+  <Structure
+  lon={lon}
+  lat={lat}
+  errG={errG}
+  />
       </div>
   )
 }

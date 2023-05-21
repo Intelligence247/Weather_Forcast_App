@@ -10,7 +10,7 @@ import LineChart from './LineChart'
 import DefaultInputs from './DefaultInputs'
 export const MyContext = React.createContext();
 
-const Structure = () => {
+const Structure = ({lon,lat, errG}) => {
 
   let days =['A Day Interval','3 Hours Interval']
   const days2= ['','','','','','','','']
@@ -33,12 +33,12 @@ const Structure = () => {
  const datum = dataAPI
  
 const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=9f90a349f83eff086947292eeda42dec&units=metric`
-  // axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=8.475&lon=4.6727168&appid=b52ebf3479c0ba50f0f006fd016ff13e&units=metric`)
+const url2= `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=b52ebf3479c0ba50f0f006fd016ff13e&units=metric`
 
 
  const fetchData=  async (params)=>{
   params.preventDefault()
-  axios.get(url)
+  axios.get(errG.length < 1 && lat !== 0 && city.length < 1 ?url2:url)
   .then(res=>{
    setDataApi(res.data.list)
    sethumidity(res.data.list[0].main.humidity)
@@ -276,8 +276,11 @@ options={userData.options}
 
              value={city}
              />
-            <img src="/media/map.png" alt="" />
+            <img src="/media/map.png"
+            onClick={fetchData}
+             alt="" />
              <button
+             onClick={fetchData}
             >search</button> 
             </form> 
             <p className='text-[1rem] text-red-500 uppercase h-7'>{booleanErr?`${errM.response.data.message}`:""}</p>
