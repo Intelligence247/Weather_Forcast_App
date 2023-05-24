@@ -226,7 +226,7 @@ return (
 
         <div className="lefttop">
           <h1>Weather Forcast App</h1>
-          <div className=' flex lg:flex-row flex-col gap-5'>
+          <div className='flex lg:flex-row flex-col gap-5'>
           {/* <div className=""> */}
          <Lefttopleft
          arr={topleftdata}
