@@ -10,7 +10,7 @@ const Box = ({img, time,level}) => {
             className='w-14'
             alt="" />
             </div>
-            <p className='text-opacity-80'>{level}</p>
+            <p className='text-opacity-80'>{level}<sup>o</sup> </p>
     </div>
   )
 }
