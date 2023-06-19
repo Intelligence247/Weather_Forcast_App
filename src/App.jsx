@@ -34,21 +34,21 @@ if('geolocation' in navigator){
   console.log("geolocation is not supported")
 }
 
-const fetchdata= ()=>{
-  axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=b52ebf3479c0ba50f0f006fd016ff13e&units=metric`)
-  .then(res=>{
-    console.log(res.data)
+// const fetchdata= ()=>{
+//   axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=b52ebf3479c0ba50f0f006fd016ff13e&units=metric`)
+//   .then(res=>{
+//     console.log(res.data)
 
-  })
-  .catch(err=>{
-    console.log(err)
-  })
-}
-useEffect(() => {
-  fetchdata()
-}, [])
-console.log(lat.length)
-console.log(lat)
+//   })
+//   .catch(err=>{
+//     console.log(err)
+//   })
+// }
+// useEffect(() => {
+//   fetchdata()
+// }, [])
+// console.log(lat.length)
+// console.log(lat)
 
   return (   
    

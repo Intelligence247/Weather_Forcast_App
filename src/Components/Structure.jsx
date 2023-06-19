@@ -8,6 +8,7 @@ import HourlyndDayily from './HourlyndDayily'
 import App from '../App'
 import LineChart from './LineChart'
 import DefaultInputs from './DefaultInputs'
+import { data } from 'autoprefixer'
 export const MyContext = React.createContext();
 
 const Structure = ({lon,lat, errG}) => {
@@ -47,7 +48,6 @@ const url2= `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${l
    setflow(res.data.list[0].wind)
    setpressure(res.data.list[0].main.pressure)
      setcityname(`${res.data.city.name}, ${res.data.city.country}`)
-     setCity(`${res.data.city.name}`)
       let tmpArr= []
       let times = []
       let desc =[]
@@ -67,7 +67,7 @@ const url2= `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${l
      setdesc(desc)
      setfeels(feelslike)
      setmain(main)
-   setCity('')
+     setCity('')
 
 setbooleanErr(false)
 
@@ -76,6 +76,8 @@ setbooleanErr(false)
     console.log(err+' '+'Error here')
     setbooleanErr(true)
     setErrM(err)
+     setCity('')
+
   })
 }
 
@@ -224,14 +226,14 @@ return (
 
       <div className="stleftW">
 
-        <div className="lefttop">
+        <div className="lefttop w-full lg:h-[70%] h-full pt-5 ">
           <h1>Weather Forcast App</h1>
           <div className='flex lg:flex-row flex-col gap-5'>
-          {/* <div className=""> */}
+          <div className="">
          <Lefttopleft
          arr={topleftdata}
          city={`${cityname}`}/>
-      {/* </div> */}
+      </div>
       <div className="lefttopright">
 <LineChart chartData={userData}
 options={userData.options}
@@ -243,7 +245,7 @@ options={userData.options}
         </div>
 </div>
         <div className="leftbottom relative">
-          <p className='lg:fixed absolute left-1 bottom-2 mr-[4rem] lg:h-[8rem] h-[7rem] px-0 grid place-items-center  bg-[url(/media/moody.jpg)] bg-center bg-cover text-[1.2rem] font-[700]'>Feels Like</p>
+          {/* <p className=' lg:fixed absolute left-1 bottom-2 mr-[4rem] lg:h-[8rem] h-[7rem] px-0 grid place-items-center  bg-[url(/media/moody.jpg)] bg-center bg-cover text-[1.2rem] font-[700]'>Feels Like</p> */}
           {
             swt===0?
             alldata1.map((d,i)=>(
@@ -266,14 +268,13 @@ options={userData.options}
         </div>
 
       </div>
+      
         <div className="strightW">
           <div className="flex justify-center items-center flex-col">
              <form className='inputW' onSubmit={fetchData}>
             <input type="text" 
             onChange={(e)=>setCity(e.target.value)}
-
-             id="" 
-
+            id="" 
              value={city}
              />
             <img src="/media/map.png"
@@ -281,7 +282,7 @@ options={userData.options}
              alt="" />
              <button
              onClick={fetchData}
-            >search</button> 
+            >Search</button> 
             </form> 
             <p className='text-[1rem] text-red-500 uppercase h-7'>{booleanErr?`${errM.response.data.message}`:""}</p>
           </div>

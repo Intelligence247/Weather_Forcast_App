@@ -1,5 +1,6 @@
 import React from 'react'
 import Weatherforms from './Weatherforms'
+import "./Structure.css"
 const Lefttopleft = (props) => {
 const {arr}=props
   return (
@@ -9,7 +10,7 @@ const {arr}=props
       <img src="/media/cloud3.png" 
       className=''
       alt="" />
-          <div className='weatherforms flex flex-wrap gap-4 justify-center'>
+          <div className='weatherforms'>
           {
             arr.map((a,i)=>(
               <Weatherforms

@@ -7,7 +7,7 @@
 }
 
 .body{
-    @apply w-screen h-screen bg-no-repeat bg-cover bg-center bg-fixed bg-[url(/media/moody.jpg)] overflow-hidden lg:overflow-y-hidden overflow-y-auto
+    @apply w-full h-full bg-no-repeat bg-cover bg-center bg-fixed bg-[url(/media/moody.jpg)] 
 }
 
 *::-webkit-scrollbar{

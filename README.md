@@ -11,6 +11,8 @@
 [Go Live](https://phenomenal-sunshine-547717.netlify.app/)
 
 ![screenshot](/public/media/Short3.png)
+![screenshot](/public/media/homesKetch.png)
+
 ## Contact
 If you want to contact me you can reach me at
 - https://github.com/Intelligence247 or
