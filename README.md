@@ -10,8 +10,9 @@
 ## Preview here
 [Go Live](https://phenomenal-sunshine-547717.netlify.app/)
 
-![screenshot](/public/media/Short3.png)
 ![screenshot](/public/media/homesketch.png)
+![screenshot](/public/media/Short3.png)
+
 
 ## Contact
 If you want to contact me you can reach me at
