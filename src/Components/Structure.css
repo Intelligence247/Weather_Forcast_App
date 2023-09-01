@@ -19,7 +19,7 @@
     @apply lg:w-[25%] w-full bg-black bg-opacity-20 h-full lg:border-l-2 border-l-0 lg:border-[rgba(250,250,250,0.3)]  overflow-hidden py-5 lg:pt-6 pt-14 
 }
 .inputW{
-    @apply bg-black rounded-full border-white flex lg:w-[90%] w-[95%] h-8 items-center justify-center m-auto gap-2 bg-opacity-20 border-2 border-[rgba(250,250,250,0.3)] px-2
+    @apply bg-black rounded-full flex lg:w-[90%] w-[95%] h-10 items-center justify-center m-auto gap-2 bg-opacity-20 border-2 border-green-700 px-2 
 }
 .inputW img{
     @apply w-4 h-4
@@ -29,20 +29,20 @@
     @apply border-none h-full flex justify-center items-start outline-none bg-transparent 
 }
 .inputW button{
-    @apply h-4 opacity-90
+    @apply block opacity-90
 }
 .inputW input{
     @apply pl-4 w-full bg-transparent
 }
 .deg{
-    @apply lg:h-40 h-auto w-full flex flex-col justify-center items-center gap-4
+    @apply lg:h-40 h-auto w-full flex flex-col justify-center items-center gap-2
 }
 
 .deg p:nth-child(2){
-    @apply text-[3rem] font-bold leading-3
+    @apply text-[2.5rem] mt-2 font-bold leading-3
 }
 .deg img{
-    @apply lg:w-[6rem] h-[6rem]
+    @apply lg:w-[5rem] h-[5rem]
 }
 .deg p:last-child{
     @apply text-xs text-[white] text-opacity-50 mt-2
@@ -61,7 +61,7 @@ main .daysW{
 }
 
 main .daysW p{
-    @apply text-sm bg-black bg-opacity-30 rounded-lg w-[8rem] flex justify-center items-center cursor-pointer hover:bg-white hover:bg-opacity-30 h-8
+    @apply text-sm bg-black bg-opacity-30 rounded-lg w-[8rem] flex justify-center items-center cursor-pointer hover:bg-white hover:bg-opacity-30 h-8 whitespace-nowrap
 }
 .sectionW{
     @apply w-full flex justify-center overflow-y-auto lg:h-[28rem] max-h-screen min-h-max

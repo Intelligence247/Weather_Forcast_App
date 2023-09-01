@@ -14,7 +14,6 @@ export const MyContext = React.createContext();
 const Structure = ({lon,lat, errG}) => {
 
   let days =['A Day Interval','3 Hours Interval']
-  const days2= ['','','','','','','','']
 
   const [dataAPI, setDataApi] = useState([])
   const [tmp, setTmp] = useState([])
@@ -154,10 +153,9 @@ const months = ["January", 'February', 'March', "April", 'May', 'June', 'July', 
 let monthdata=[]
 if (dataAPI.length>1){
   for(const a of alldata1){
- monthdata.push(months[parseInt(a.time.slice(5,7))] +' '+ a.time.slice(8,11))
+ monthdata.push(months[parseInt(a.time.slice(5,7))].slice(0,3) +' '+ a.time.slice(8,11))
   }
 }
-
 const userData={ 
   labels: monthdata.map((m)=>m),
  
@@ -181,7 +179,6 @@ const userData={
     
      },  
 ],
-
 
 
 options: {
@@ -218,6 +215,8 @@ options: {
 }}
 
 
+
+
 return (
     <div className='grid w-full h-full place-items-center'>
 
@@ -227,7 +226,7 @@ return (
       <div className="stleftW">
 
         <div className="lefttop w-full lg:h-[70%] h-full pt-5 ">
-          <h1>Weather Forcast App</h1>
+          <h1>Weather Forecast App</h1>
           <div className='flex lg:flex-row flex-col gap-5'>
           <div className="">
          <Lefttopleft
@@ -250,7 +249,7 @@ options={userData.options}
             swt===0?
             alldata1.map((d,i)=>(
               <Box key={i} 
-              time={monthdata[i]}
+              time={(monthdata[i])}
               level={Math.round(dailyFeels[i])}
               img={d.main}
               />
@@ -294,7 +293,7 @@ options={userData.options}
           </div>
           <div className="divider"></div>
           <main>
-            <h1>Five Days Forcasts</h1>
+            <h1>Five Days Forecast</h1>
           <div className="daysW">
             {
               days.map((day,i)=>(
@@ -325,7 +324,6 @@ time.map((t,i)=>(
 <HourlyndDayily
 key={i}
 time={months[parseInt(time[i].slice(5,7))] +' '+ time[i].slice(8,11)+' '+time[i].slice(11,16)}
-
 desc={desc[i]}
 temp={tmp[i]}
 img={main[i]}
@@ -334,7 +332,7 @@ img={main[i]}
 
           }
           </section>
-          </div>
+              </div>
 
           </main>
         </div>
@@ -353,3 +351,11 @@ img={main[i]}
 }
 
 export default Structure
+
+
+
+/* Github:(https://github.com/Intelligence247/Weather_Forcast_App)
+
+Live: (https://phenomenal-sunshine-547717.netlify.app/)
+
+This is a weather app that gives users the opportunity to search for any city or country in the world and get the forecast for the next five days. The interval can be daily or 3hours. You can also click on the location Icon to get the forecast of your present location. Created with Reactjs, Tailwind css, Weather API. Mobile Responsive*/ 
